@@ -1,7 +1,7 @@
 #!C:\Users\Seokhawn\anaconda3\python
 import sys
 import codecs
-import cgi, os
+import cgi, os, view
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach()) # 한글 출력을 위한 Encoding
 
 
@@ -15,11 +15,6 @@ if 'id' in form:
 else:
     pageId = 'Welcome'
     description = 'Hello, Web'
-
-files = os.listdir('data')
-listStr=''
-for item in files:
-    listStr = listStr + '<li> <a href="index.py?id={name}">{name}</a></li>'.format(name=item)
 
 print('''<!doctype html>
 <html>
@@ -41,5 +36,5 @@ print('''<!doctype html>
     </form>
 </body>
 </html>
-'''.format(title=pageId, desc = description, listStr = listStr, form_default_title = pageId, form_default_description = description)) #name : server로 전송한 데이터의 이름
+'''.format(title=pageId, desc = description, listStr = view.getList(), form_default_title = pageId, form_default_description = description)) #name : server로 전송한 데이터의 이름
                                                                  #package로 tag를 달아서 application(action에 들어간 이름의 어플리케이션)으로 전송할 때, "form"을 사용함.
